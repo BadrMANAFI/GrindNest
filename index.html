@@ -34,6 +34,11 @@
         font-family: "Inter", sans-serif;
         color: #2c2c2c;
         background-color: #fafaf8;
+        background-image: url("Background.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
         line-height: 1.6;
       }
 
@@ -45,7 +50,7 @@
         --sage: #a7beae;
         --off-white: #fafaf8;
         --dark: #2c2c2c;
-        --text-light: #666;
+        --text-light: #ffffff;
       }
 
       /* Typography */
@@ -383,13 +388,66 @@
 
       .about-image {
         background: linear-gradient(135deg, var(--beige) 0%, var(--sage) 100%);
-        border-radius: 15px;
-        height: 400px;
+        border-radius: 20px;
+        height: 500px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 4rem;
         color: rgba(255, 255, 255, 0.3);
+        overflow: hidden;
+        position: relative;
+        padding: 20px;
+        box-shadow:
+          0 20px 60px rgba(184, 80, 66, 0.25),
+          0 0 0 1px rgba(184, 80, 66, 0.1);
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        animation: imageReveal 1s ease-out;
+      }
+
+      .about-image:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow:
+          0 30px 80px rgba(184, 80, 66, 0.35),
+          0 0 0 2px rgba(231, 232, 209, 0.5);
+      }
+
+      .about-image img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 15px;
+        transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        width: auto;
+        height: auto;
+      }
+
+      .about-image:hover img {
+        transform: scale(1.05);
+      }
+
+      /* Overlay decoratif */
+      .about-image::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(184, 80, 66, 0.05) 0%,
+          transparent 50%,
+          rgba(167, 190, 174, 0.05) 100%
+        );
+        border-radius: 20px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+      }
+
+      .about-image:hover::before {
+        opacity: 1;
       }
 
       /* ========== SPACES SECTION ========== */
@@ -450,7 +508,7 @@
       }
 
       .space-body p {
-        color: var(--text-light);
+        color: var(--dark);
         margin-bottom: 1.5rem;
         font-size: 0.95rem;
       }
@@ -462,7 +520,7 @@
 
       .space-features li {
         padding: 0.5rem 0;
-        color: var(--text-light);
+        color: var(--dark);
         display: flex;
         align-items: center;
         gap: 0.8rem;
@@ -559,7 +617,7 @@
         right: -1.5rem;
         top: 60px;
         font-size: 1.5rem;
-        color: var(--sage);
+        color: var(--dark);
       }
 
       .step-number {
@@ -586,12 +644,104 @@
         font-family: "Playfair Display", serif;
         font-size: 1.3rem;
         margin-bottom: 1rem;
-        color: var(--dark);
+        color: var(--text-light);
       }
 
       .process-step p {
         color: var(--text-light);
         font-size: 0.95rem;
+      }
+
+      /* ========== MENU SECTION ========== */
+      .menu {
+        padding: 6rem 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(167, 190, 174, 0.08),
+          rgba(231, 232, 209, 0.1)
+        );
+      }
+
+      .menu-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .menu-category {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      .menu-category:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(184, 80, 66, 0.15);
+      }
+
+      .menu-category h3 {
+        font-size: 1.5rem;
+        color: var(--terracotta);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .menu-category h3 i {
+        font-size: 1.3rem;
+      }
+
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px dotted rgba(184, 80, 66, 0.2);
+      }
+
+      .menu-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .menu-item-name {
+        font-weight: 600;
+        color: var(--dark);
+        flex: 1;
+      }
+
+      .menu-item-price {
+        color: var(--terracotta);
+        font-weight: 700;
+        font-size: 1.1rem;
+        white-space: nowrap;
+        margin-left: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        .menu {
+          padding: 4rem 1.5rem;
+        }
+
+        .menu-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .menu-category {
+          padding: 1.5rem;
+        }
       }
 
       /* ========== GALLERY SECTION ========== */
@@ -623,12 +773,26 @@
         justify-content: center;
         font-size: 4rem;
         color: rgba(255, 255, 255, 0.3);
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease;
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
       }
 
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        display: block;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1) rotate(2deg);
+      }
+
       .gallery-item:hover {
-        transform: scale(1.05);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(184, 80, 66, 0.2);
       }
 
       /* ========== CONTACT SECTION ========== */
@@ -675,7 +839,7 @@
         font-family: "Playfair Display", serif;
         font-size: 1.1rem;
         margin-bottom: 0.5rem;
-        color: var(--dark);
+        color: black;
       }
 
       .info-block p {
@@ -776,31 +940,6 @@
         box-shadow: 0 10px 30px rgba(184, 80, 66, 0.3);
       }
 
-      /* ========== FLOATING WHATSAPP BUTTON ========== */
-      .whatsapp-btn {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 60px;
-        height: 60px;
-        background: #25d366;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.8rem;
-        text-decoration: none;
-        box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-        transition: all 0.3s ease;
-        z-index: 999;
-      }
-
-      .whatsapp-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
-      }
-
       /* ========== ANIMATIONS ========== */
       @keyframes fadeInUp {
         from {
@@ -844,6 +983,17 @@
         100% {
           opacity: 0;
           transform: translateX(-50%) translateY(20px);
+        }
+      }
+
+      @keyframes imageReveal {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
         }
       }
 
@@ -945,7 +1095,10 @@
         }
 
         .about-image {
-          height: 300px;
+          height: 400px;
+          border-radius: 15px;
+          box-shadow: 0 15px 40px rgba(184, 80, 66, 0.2);
+          padding: 15px;
         }
 
         .process-step:not(:last-child)::after {
@@ -968,14 +1121,6 @@
         .gallery-item {
           height: 200px;
           font-size: 2.5rem;
-        }
-
-        .whatsapp-btn {
-          bottom: 20px;
-          right: 20px;
-          width: 50px;
-          height: 50px;
-          font-size: 1.5rem;
         }
       }
 
@@ -1008,63 +1153,195 @@
 
       /* ========== FOOTER ========== */
       footer {
-        background: linear-gradient(
-          135deg,
-          var(--terracotta) 0%,
-          var(--terracotta-light) 100%
-        );
+        background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
         color: white;
-        padding: 2rem;
-        text-align: center;
+        padding: 4rem 2rem 2rem;
         margin-top: 3rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(
+            circle at 20% 80%,
+            rgba(184, 80, 66, 0.05) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(167, 190, 174, 0.03) 0%,
+            transparent 40%
+          );
+        pointer-events: none;
       }
 
       .footer-content {
         max-width: 1200px;
         margin: 0 auto;
+        position: relative;
+        z-index: 1;
       }
 
-      .footer-links {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
+      .footer-columns {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-column h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
         margin-bottom: 1.5rem;
-        flex-wrap: wrap;
+        color: var(--terracotta);
+        position: relative;
+        padding-bottom: 0.8rem;
       }
 
-      .footer-links a {
-        color: white;
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--terracotta);
+        border-radius: 2px;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-column a {
+        color: rgba(255, 255, 255, 0.85);
         text-decoration: none;
-        font-size: 0.9rem;
-        transition: opacity 0.3s ease;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
       }
 
-      .footer-links a:hover {
-        opacity: 0.8;
+      .footer-column a::before {
+        content: "→";
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: all 0.3s ease;
       }
 
-      .footer-divider {
-        width: 100px;
-        height: 2px;
-        background: rgba(255, 255, 255, 0.3);
-        margin: 1.5rem auto;
+      .footer-column a:hover {
+        color: var(--terracotta);
+        padding-left: 8px;
+      }
+
+      .footer-column a:hover::before {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .footer-column p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .footer-social {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .social-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: rgba(184, 80, 66, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--terracotta);
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        font-size: 1.1rem;
+        border: 2px solid rgba(184, 80, 66, 0.3);
+      }
+
+      .social-icon:hover {
+        background: var(--terracotta);
+        color: white;
+        border-color: var(--terracotta);
+        transform: translateY(-8px) scale(1.1);
+        box-shadow: 0 10px 25px rgba(184, 80, 66, 0.4);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 2rem;
+        text-align: center;
       }
 
       .footer-copyright {
         font-size: 0.9rem;
         opacity: 0.9;
         margin-bottom: 0.5rem;
+        font-weight: 500;
       }
 
       .footer-credit {
-        font-size: 0.8rem;
-        opacity: 0.7;
+        font-size: 0.85rem;
+        opacity: 0.75;
+        letter-spacing: 0.5px;
       }
 
       @media (max-width: 768px) {
-        .footer-links {
-          gap: 1rem;
-          font-size: 0.85rem;
+        footer {
+          padding: 3rem 1.5rem 2rem;
+        }
+
+        .footer-columns {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .footer-column h3 {
+          font-size: 1.1rem;
+          margin-bottom: 1.2rem;
+        }
+
+        .footer-copyright,
+        .footer-credit {
+          font-size: 0.8rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        footer {
+          padding: 2rem 1rem 1.5rem;
+        }
+
+        .footer-columns {
+          gap: 1.5rem;
+        }
+
+        .footer-column h3 {
+          font-size: 1rem;
+        }
+
+        .footer-column a {
+          font-size: 0.9rem;
         }
       }
     </style>
@@ -1076,10 +1353,11 @@
         <img src="image.png" alt="The GrindNest Logo" />
         <span>The GrindNest</span>
       </a>
-      <ul id="menu">
+      <ul id="nav-menu">
         <li><a href="#about" data-key="about">À propos</a></li>
         <li><a href="#spaces" data-key="spaces">Espaces</a></li>
         <li><a href="#pricing" data-key="pricing">Tarifs</a></li>
+        <li><a href="#menu" data-key="menu">Menu</a></li>
         <li><a href="#process" data-key="process">Processus</a></li>
         <li><a href="#gallery" data-key="gallery">Galerie</a></li>
         <li><a href="#contact" data-key="contact">Contact</a></li>
@@ -1183,7 +1461,16 @@
           </div>
         </div>
         <div class="about-image fade-in">
-          <i class="fas fa-image"></i>
+          <img
+            src="About-Content.jpeg"
+            alt="The GrindNest - About"
+            style="
+              max-width: 100%;
+              max-height: 100%;
+              object-fit: contain;
+              border-radius: 15px;
+            "
+          />
         </div>
       </div>
     </section>
@@ -1211,7 +1498,11 @@
               <li data-key="expert_barista">Barista expert</li>
               <li data-key="local_pastries">Pâtisseries locales</li>
             </ul>
-            <p><strong>À partir de 15-25 DH</strong></p>
+            <p>
+              <strong data-key="starting_from_coffee"
+                >À partir de 15-25 DH</strong
+              >
+            </p>
           </div>
         </div>
         <div class="space-card fade-in">
@@ -1230,7 +1521,11 @@
               <li data-key="unlimited_electricity">Électricité illimitée</li>
               <li data-key="optional_24_7">Accès 24/7 optionnel</li>
             </ul>
-            <p><strong>À partir de 35-60 DH</strong></p>
+            <p>
+              <strong data-key="starting_from_coworking"
+                >À partir de 35-60 DH</strong
+              >
+            </p>
           </div>
         </div>
         <div class="space-card fade-in">
@@ -1249,7 +1544,7 @@
               <li data-key="catering_service">Service traiteur optionnel</li>
               <li data-key="reserved_parking">Parking réservé</li>
             </ul>
-            <p><strong>Sur devis</strong></p>
+            <p><strong data-key="upon_quote">Sur devis</strong></p>
           </div>
         </div>
       </div>
@@ -1327,35 +1622,131 @@
         <div class="process-steps">
           <div class="process-step fade-in">
             <div class="step-number">1</div>
-            <h4>Réservation Flexible</h4>
-            <p>
+            <h4 data-key="reservation">Réservation Flexible</h4>
+            <p data-key="reservation_desc">
               Choisissez votre date, horaire et type d'espace via notre
               formulaire intuitif
             </p>
           </div>
           <div class="process-step fade-in">
             <div class="step-number">2</div>
-            <h4>Paiement Facile</h4>
-            <p>
+            <h4 data-key="payment">Paiement Facile</h4>
+            <p data-key="payment_desc">
               Payez en ligne sécurisé ou sur place avec multiple moyens de
               paiement
             </p>
           </div>
           <div class="process-step fade-in">
             <div class="step-number">3</div>
-            <h4>Accès Sécurisé</h4>
-            <p>
+            <h4 data-key="access">Accès Sécurisé</h4>
+            <p data-key="access_desc">
               Accédez à votre espace réservé avec code d'accès et confirmation
               instantanée
             </p>
           </div>
           <div class="process-step fade-in">
             <div class="step-number">4</div>
-            <h4>Suivi & Entretien</h4>
-            <p>
+            <h4 data-key="maintenance">Suivi & Entretien</h4>
+            <p data-key="maintenance_desc">
               Retours des clients et maintenance régulière pour votre confort
               optimal
             </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+      <div class="menu-container">
+        <h2 class="section-title fade-in" data-key="menu_title">Notre Menu</h2>
+        <p class="section-subtitle fade-in" data-key="menu_subtitle">
+          Découvrez nos délicieuses boissons et spécialités
+        </p>
+
+        <div class="menu-grid">
+          <!-- Cafés Chauds -->
+          <div class="menu-category fade-in">
+            <h3>
+              <i class="fas fa-mug-hot"></i>
+              <span data-key="hot_coffees">Cafés Chauds</span>
+            </h3>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_espresso"
+                >Espresso</span
+              >
+              <span class="menu-item-price">15 DH</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_cafe_creme"
+                >Café Crème</span
+              >
+              <span class="menu-item-price">15 DH</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_cafe_latte"
+                >Café Latte</span
+              >
+              <span class="menu-item-price">45 DH</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_cappuccino"
+                >Cappuccino</span
+              >
+              <span class="menu-item-price">30 DH</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_cafe_latte_caramel"
+                >Café Latte + Caramel</span
+              >
+              <span class="menu-item-price">40 DH</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_hot_chocolate"
+                >Chocolat Chaud</span
+              >
+              <span class="menu-item-price">12 DH</span>
+            </div>
+          </div>
+
+          <!-- Cafés Froids -->
+          <div class="menu-category fade-in">
+            <h3>
+              <i class="fas fa-ice-cream"></i>
+              <span data-key="iced_coffees">Cafés Froids</span>
+            </h3>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_iced_coffee"
+                >Café Glacé</span
+              >
+              <span class="menu-item-price">30 DH</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_iced_coffee_caramel"
+                >Café Glacé + Caramel</span
+              >
+              <span class="menu-item-price">45 DH</span>
+            </div>
+          </div>
+
+          <!-- Boissons Spéciales -->
+          <div class="menu-category fade-in">
+            <h3>
+              <i class="fas fa-leaf"></i>
+              <span data-key="special_drinks">Boissons Spéciales</span>
+            </h3>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_bubble_tea"
+                >Bubble Tea</span
+              >
+              <span class="menu-item-price">45 DH</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-name" data-key="menu_tea_moroccan"
+                >Thé Marocain</span
+              >
+              <span class="menu-item-price">6 DH</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1370,22 +1761,52 @@
         </p>
         <div class="gallery-grid">
           <div class="gallery-item fade-in">
-            <i class="fas fa-image"></i>
+            <img
+              src="coworking-space.jpeg"
+              alt="Espace coworking"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 15px;
+              "
+            />
           </div>
           <div class="gallery-item fade-in">
-            <i class="fas fa-image"></i>
+            <img
+              src="Zone-détente.jpeg"
+              alt="Zone détente"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 15px;
+              "
+            />
           </div>
           <div class="gallery-item fade-in">
-            <i class="fas fa-image"></i>
+            <img
+              src="Réunion.jpeg"
+              alt="Salle réunion"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 15px;
+              "
+            />
           </div>
           <div class="gallery-item fade-in">
-            <i class="fas fa-image"></i>
-          </div>
-          <div class="gallery-item fade-in">
-            <i class="fas fa-image"></i>
-          </div>
-          <div class="gallery-item fade-in">
-            <i class="fas fa-image"></i>
+            <img
+              src="Patisserie.jpeg"
+              alt="Pâtisseries"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 15px;
+              "
+            />
           </div>
         </div>
       </div>
@@ -1406,7 +1827,7 @@
               <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
               <div>
                 <h4>Localisation</h4>
-                <p>Rabat, Maroc<br />Centre-ville, quartier dynamique</p>
+                <p>Rabat, Maroc<br />16 . AV. de palmas Hassan-RABAT</p>
               </div>
             </div>
             <div class="info-block">
@@ -1420,14 +1841,14 @@
               <div class="info-icon"><i class="fas fa-phone"></i></div>
               <div>
                 <h4>Téléphone</h4>
-                <p>+212 5XX XXX XXX</p>
+                <p>+212 772-833727</p>
               </div>
             </div>
             <div class="info-block">
               <div class="info-icon"><i class="fas fa-envelope"></i></div>
               <div>
                 <h4>Email</h4>
-                <p>hello@thegrindnest.ma</p>
+                <p>grindnest@gmail.com</p>
               </div>
             </div>
             <div>
@@ -1505,37 +1926,77 @@
     <!-- Footer -->
     <footer>
       <div class="footer-content">
-        <div class="footer-links">
-          <a href="#about" data-key="about">À propos</a>
-          <a href="#spaces" data-key="spaces">Espaces</a>
-          <a href="#pricing" data-key="pricing">Tarifs</a>
-          <a href="#contact" data-key="contact">Contact</a>
-          <a href="mailto:hello@thegrindnest.ma" data-key="email">Email</a>
+        <div class="footer-columns">
+          <!-- À propos -->
+          <div class="footer-column">
+            <h3 data-key="footer_about">À Propos</h3>
+            <p data-key="footer_about_desc">
+              The GrindNest est un espace de café, coworking et communauté. Un
+              lieu pour créer, collaborer et connecter.
+            </p>
+          </div>
+
+          <!-- Navigation -->
+          <div class="footer-column">
+            <h3 data-key="footer_navigation">Navigation</h3>
+            <ul>
+              <li><a href="#about" data-key="about">À propos</a></li>
+              <li><a href="#spaces" data-key="spaces">Espaces</a></li>
+              <li><a href="#menu" data-key="menu">Menu</a></li>
+              <li><a href="#pricing" data-key="pricing">Tarifs</a></li>
+              <li><a href="#gallery" data-key="gallery">Galerie</a></li>
+            </ul>
+          </div>
+
+          <!-- Espaces -->
+          <div class="footer-column">
+            <h3 data-key="footer_spaces">Nos Espaces</h3>
+            <ul>
+              <li>
+                <a href="#spaces" data-key="cafe_relax">Café & Détente</a>
+              </li>
+              <li>
+                <a href="#spaces" data-key="coworking_title">Coworking</a>
+              </li>
+              <li>
+                <a href="#spaces" data-key="meeting_title">Salles Réunion</a>
+              </li>
+              <li><a href="#spaces" data-key="footer_events">Événements</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div class="footer-column">
+            <h3 data-key="footer_contact">Contact</h3>
+            <ul>
+              <li>
+                <a href="mailto:hello@thegrindnest.ma" data-key="email"
+                  >📧 hello@thegrindnest.ma</a
+                >
+              </li>
+              <li><a href="tel:+212 772-833727">📱 +212 772-833727</a></li>
+              <li><a href="#contact" data-key="contact">Nous Contacter</a></li>
+              <li><a href="#" data-key="footer_hours">Horaires</a></li>
+            </ul>
+          </div>
         </div>
-        <div class="footer-divider"></div>
-        <div class="footer-copyright" data-key="copyright">
-          © 2026 The GrindNest. Tous droits réservés.
-        </div>
-        <div class="footer-credit" data-key="slogan">
-          Café • Coworking • Communauté
+
+        <div class="footer-bottom">
+          <div class="footer-copyright" data-key="copyright">
+            © 2026 The GrindNest. Tous droits réservés.
+          </div>
+          <div class="footer-credit" data-key="slogan">
+            Café • Coworking • Communauté
+          </div>
         </div>
       </div>
     </footer>
-
-    <!-- WhatsApp Button -->
-    <a
-      href="https://wa.me/212XXXXXXXXX"
-      class="whatsapp-btn"
-      title="Contactez-nous sur WhatsApp"
-    >
-      <i class="fab fa-whatsapp"></i>
-    </a>
 
     <!-- Scripts -->
     <script>
       // Smooth scroll and navigation
       const menuToggle = document.getElementById("menuToggle");
-      const menu = document.getElementById("menu");
+      const menu = document.getElementById("nav-menu");
       const nav = document.querySelector("nav");
 
       menuToggle.addEventListener("click", () => {
@@ -1621,6 +2082,7 @@
           about: "À propos",
           spaces: "Espaces",
           pricing: "Tarifs",
+          menu: "Menu",
           process: "Processus",
           gallery: "Galerie",
           contact: "Contact",
@@ -1686,6 +2148,11 @@
           maintenance: "Suivi & Entretien",
           maintenance_desc:
             "Retours des clients et maintenance régulière pour votre confort optimal",
+          menu_title: "Notre Menu",
+          menu_subtitle: "Découvrez nos délicieuses boissons et spécialités",
+          hot_coffees: "Cafés Chauds",
+          iced_coffees: "Cafés Froids",
+          special_drinks: "Boissons Spéciales",
           gallery_title: "Galerie",
           gallery_subtitle: "Explorez l'ambiance unique de The GrindNest",
           contact_title: "Nous contacter",
@@ -1723,11 +2190,33 @@
           price_coffee_space: "35-60 DH",
           price_monthly: "500-1 500 DH",
           price_telework: "80-100 DH",
+          menu_espresso: "Espresso",
+          menu_cafe_creme: "Café Crème",
+          menu_cafe_latte: "Café Latte",
+          menu_cappuccino: "Cappuccino",
+          menu_cafe_latte_caramel: "Café Latte + Caramel",
+          menu_hot_chocolate: "Chocolat Chaud",
+          menu_iced_coffee: "Café Glacé",
+          menu_iced_coffee_caramel: "Café Glacé + Caramel",
+          menu_bubble_tea: "Bubble Tea",
+          menu_tea_moroccan: "Thé Marocain",
+          starting_from_coffee: "À partir de 15-25 DH",
+          starting_from_coworking: "À partir de 35-60 DH",
+          upon_quote: "Sur devis",
+          footer_about: "À Propos",
+          footer_about_desc:
+            "The GrindNest est un espace de café, coworking et communauté. Un lieu pour créer, collaborer et connecter.",
+          footer_navigation: "Navigation",
+          footer_spaces: "Nos Espaces",
+          footer_contact: "Contact",
+          footer_events: "Événements",
+          footer_hours: "Horaires",
         },
         ar: {
           about: "معلومات عنا",
           spaces: "المساحات",
           pricing: "الأسعار",
+          menu: "قائمة الطعام",
           process: "العملية",
           gallery: "المعرض",
           contact: "اتصل بنا",
@@ -1786,6 +2275,11 @@
           access_desc: "احصل على المساحة المحجوزة برمز وصول وتأكيد فوري",
           maintenance: "المتابعة والصيانة",
           maintenance_desc: "تعليقات العملاء والصيانة المنتظمة لراحتك المثلى",
+          menu_title: "قائمة الطعام",
+          menu_subtitle: "اكتشف مشروباتنا اللذيذة والتخصصات",
+          hot_coffees: "القهوة الساخنة",
+          iced_coffees: "القهوة الباردة",
+          special_drinks: "المشروبات الخاصة",
           gallery_title: "المعرض",
           gallery_subtitle: "استكشف الأجواء الفريدة من The GrindNest",
           contact_title: "اتصل بنا",
@@ -1823,11 +2317,33 @@
           price_coffee_space: "35-60 درهم",
           price_monthly: "500-1500 درهم",
           price_telework: "80-100 درهم",
+          menu_espresso: "إسبريسو",
+          menu_cafe_creme: "كافيه كريم",
+          menu_cafe_latte: "كافيه لاتيه",
+          menu_cappuccino: "كابتشينو",
+          menu_cafe_latte_caramel: "كافيه لاتيه + كراميل",
+          menu_hot_chocolate: "شوكولاتة ساخنة",
+          menu_iced_coffee: "كافيه مثلج",
+          menu_iced_coffee_caramel: "كافيه مثلج + كراميل",
+          menu_bubble_tea: "شاي الفقاعات",
+          menu_tea_moroccan: "الشاي المغربي",
+          starting_from_coffee: "من 15-25 درهم",
+          starting_from_coworking: "من 35-60 درهم",
+          upon_quote: "حسب الطلب",
+          footer_about: "حول",
+          footer_about_desc:
+            "The GrindNest هو مساحة قهوة وعمل مشترك ومجتمع. مكان للإنشاء والتعاون والاتصال.",
+          footer_navigation: "التنقل",
+          footer_spaces: "مساحاتنا",
+          footer_contact: "اتصل بنا",
+          footer_events: "الأحداث",
+          footer_hours: "الساعات",
         },
         en: {
           about: "About",
           spaces: "Spaces",
           pricing: "Pricing",
+          menu: "Menu",
           process: "Process",
           gallery: "Gallery",
           contact: "Contact",
@@ -1893,6 +2409,11 @@
           maintenance: "Follow-up & Maintenance",
           maintenance_desc:
             "Customer feedback and regular maintenance for your optimal comfort",
+          menu_title: "Our Menu",
+          menu_subtitle: "Discover Our Delicious Drinks and Specialties",
+          hot_coffees: "Hot Coffees",
+          iced_coffees: "Iced Coffees",
+          special_drinks: "Special Drinks",
           gallery_title: "Gallery",
           gallery_subtitle: "Explore the unique atmosphere of The GrindNest",
           contact_title: "Contact Us",
@@ -1929,6 +2450,27 @@
           price_coffee_space: "35-60 DH",
           price_monthly: "500-1,500 DH",
           price_telework: "80-100 DH",
+          menu_espresso: "Espresso",
+          menu_cafe_creme: "Café Crème",
+          menu_cafe_latte: "Café Latte",
+          menu_cappuccino: "Cappuccino",
+          menu_cafe_latte_caramel: "Café Latte + Caramel",
+          menu_hot_chocolate: "Hot Chocolate",
+          menu_iced_coffee: "Iced Coffee",
+          menu_iced_coffee_caramel: "Iced Coffee + Caramel",
+          menu_bubble_tea: "Bubble Tea",
+          menu_tea_moroccan: "Moroccan Tea",
+          starting_from_coffee: "From 15-25 DH",
+          starting_from_coworking: "From 35-60 DH",
+          upon_quote: "Upon Quote",
+          footer_about: "About",
+          footer_about_desc:
+            "The GrindNest is a café, coworking and community space. A place to create, collaborate and connect.",
+          footer_navigation: "Navigation",
+          footer_spaces: "Our Spaces",
+          footer_contact: "Contact",
+          footer_events: "Events",
+          footer_hours: "Hours",
         },
       };
 
