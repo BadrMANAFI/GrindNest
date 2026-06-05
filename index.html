@@ -1,0 +1,2105 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The GrindNest - Café, Coworking & Networking</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        color: #2c2c2c;
+        background-color: #fafaf8;
+        line-height: 1.6;
+      }
+
+      /* Color Variables */
+      :root {
+        --terracotta: #b85042;
+        --terracotta-light: #c8845a;
+        --beige: #e7e8d1;
+        --sage: #a7beae;
+        --off-white: #fafaf8;
+        --dark: #2c2c2c;
+        --text-light: #666;
+      }
+
+      /* Typography */
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", serif;
+      }
+
+      /* ========== NAVIGATION ========== */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: padding 0.3s ease;
+      }
+
+      nav.scrolled {
+        padding: 0.5rem 2rem;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--terracotta);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo img {
+        height: 50px;
+        width: auto;
+      }
+
+      .logo i {
+        font-size: 1.8rem;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      nav a:hover {
+        color: var(--terracotta);
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--terracotta);
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--dark);
+      }
+
+      .language-selector {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .language-select {
+        background: white;
+        border: 2px solid var(--terracotta);
+        color: var(--dark);
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23B85042" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+        background-repeat: no-repeat;
+        background-position: right 0.7rem center;
+        background-size: 1.2em;
+        padding-right: 2.5rem;
+      }
+
+      .language-select:hover {
+        background-color: rgba(184, 80, 66, 0.05);
+        box-shadow: 0 2px 8px rgba(184, 80, 66, 0.2);
+      }
+
+      .language-select:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(184, 80, 66, 0.2);
+      }
+
+      .language-select option {
+        background: white;
+        color: var(--dark);
+        padding: 0.5rem;
+      }
+
+      /* ========== HERO SECTION ========== */
+      .hero {
+        margin-top: 60px;
+        min-height: calc(100vh - 60px);
+        background: linear-gradient(
+          135deg,
+          rgba(184, 80, 66, 0.05) 0%,
+          rgba(167, 190, 174, 0.05) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(200, 132, 90, 0.1) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        top: -50px;
+        right: -50px;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: bounce 2s ease-in-out infinite;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        color: var(--terracotta);
+        margin-bottom: 1rem;
+        line-height: 1.1;
+      }
+
+      .hero-tagline {
+        font-size: 1.3rem;
+        color: var(--text-light);
+        margin-bottom: 2rem;
+        font-weight: 400;
+      }
+
+      .cta-group {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+      }
+
+      .btn {
+        padding: 0.9rem 2rem;
+        border: none;
+        border-radius: 50px;
+        font-family: "Inter", sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--terracotta) 0%,
+          var(--terracotta-light) 100%
+        );
+        color: white;
+        box-shadow: 0 10px 30px rgba(184, 80, 66, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(184, 80, 66, 0.4);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: var(--terracotta);
+        border: 2px solid var(--terracotta);
+      }
+
+      .btn-secondary:hover {
+        background: var(--terracotta);
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce-down 2s ease-in-out infinite;
+      }
+
+      /* ========== ABOUT SECTION ========== */
+      .about {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 2.8rem;
+        color: var(--terracotta);
+        margin-bottom: 1rem;
+        text-align: center;
+        animation: fadeIn 0.8s ease;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        color: var(--text-light);
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .about-text h3 {
+        font-size: 1.8rem;
+        color: var(--dark);
+        margin-bottom: 1.5rem;
+      }
+
+      .about-text p {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+        font-size: 1.05rem;
+        line-height: 1.8;
+      }
+
+      .about-features {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .feature-item {
+        display: flex;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+
+      .feature-item:hover {
+        transform: translateX(5px);
+      }
+
+      .feature-icon {
+        font-size: 2rem;
+        color: var(--terracotta);
+        min-width: 50px;
+        text-align: center;
+      }
+
+      .feature-text h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+      }
+
+      .feature-text p {
+        font-size: 0.95rem;
+        color: var(--text-light);
+        margin: 0;
+      }
+
+      .about-image {
+        background: linear-gradient(135deg, var(--beige) 0%, var(--sage) 100%);
+        border-radius: 15px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* ========== SPACES SECTION ========== */
+      .spaces {
+        padding: 6rem 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(167, 190, 174, 0.05) 0%,
+          rgba(200, 132, 90, 0.05) 100%
+        );
+      }
+
+      .spaces-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .space-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.8s ease;
+      }
+
+      .space-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(184, 80, 66, 0.2);
+      }
+
+      .space-header {
+        background: linear-gradient(
+          135deg,
+          var(--terracotta) 0%,
+          var(--terracotta-light) 100%
+        );
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .space-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .space-card h3 {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .space-body {
+        padding: 2rem;
+      }
+
+      .space-body p {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+
+      .space-features {
+        list-style: none;
+        margin-bottom: 2rem;
+      }
+
+      .space-features li {
+        padding: 0.5rem 0;
+        color: var(--text-light);
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .space-features li:before {
+        content: "✓";
+        color: var(--sage);
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      /* ========== PRICING SECTION ========== */
+      .pricing {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .pricing-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        margin-top: 2rem;
+      }
+
+      .pricing-table th {
+        background: linear-gradient(
+          135deg,
+          var(--terracotta) 0%,
+          var(--terracotta-light) 100%
+        );
+        color: white;
+        padding: 1.5rem;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 3px solid var(--beige);
+      }
+
+      .pricing-table td {
+        padding: 1.5rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .pricing-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .pricing-table tr:hover {
+        background: rgba(231, 232, 209, 0.3);
+      }
+
+      .price-value {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        color: var(--terracotta);
+        font-weight: bold;
+      }
+
+      /* ========== PROCESS SECTION ========== */
+      .process {
+        padding: 6rem 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(200, 132, 90, 0.05) 0%,
+          rgba(167, 190, 174, 0.05) 100%
+        );
+      }
+
+      .process-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .process-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .process-step {
+        text-align: center;
+        position: relative;
+        animation: fadeInUp 0.8s ease;
+      }
+
+      .process-step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -1.5rem;
+        top: 60px;
+        font-size: 1.5rem;
+        color: var(--sage);
+      }
+
+      .step-number {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(
+          135deg,
+          var(--terracotta) 0%,
+          var(--terracotta-light) 100%
+        );
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0 auto 1.5rem;
+        box-shadow: 0 5px 20px rgba(184, 80, 66, 0.3);
+      }
+
+      .process-step h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: var(--dark);
+      }
+
+      .process-step p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      /* ========== GALLERY SECTION ========== */
+      .gallery {
+        padding: 6rem 2rem;
+      }
+
+      .gallery-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
+
+      .gallery-item {
+        background: linear-gradient(135deg, var(--beige) 0%, var(--sage) 100%);
+        border-radius: 15px;
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: rgba(255, 255, 255, 0.3);
+        transition: transform 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+      }
+
+      /* ========== CONTACT SECTION ========== */
+      .contact {
+        padding: 6rem 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(184, 80, 66, 0.05) 0%,
+          rgba(167, 190, 174, 0.05) 100%
+        );
+      }
+
+      .contact-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-top: 3rem;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .info-block {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .info-icon {
+        font-size: 1.8rem;
+        color: var(--terracotta);
+        min-width: 40px;
+        text-align: center;
+      }
+
+      .info-block h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+      }
+
+      .info-block p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .social-link {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--terracotta);
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      .social-link:hover {
+        background: var(--terracotta);
+        color: white;
+        transform: translateY(-5px);
+      }
+
+      /* Contact Form */
+      .contact-form {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--dark);
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 2px solid #eee;
+        border-radius: 8px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.95rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--terracotta);
+        box-shadow: 0 0 0 3px rgba(184, 80, 66, 0.1);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .form-submit {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(
+          135deg,
+          var(--terracotta) 0%,
+          var(--terracotta-light) 100%
+        );
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .form-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(184, 80, 66, 0.3);
+      }
+
+      /* ========== FLOATING WHATSAPP BUTTON ========== */
+      .whatsapp-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: #25d366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.8rem;
+        text-decoration: none;
+        box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+        z-index: 999;
+      }
+
+      .whatsapp-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+      }
+
+      /* ========== ANIMATIONS ========== */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes bounce-down {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+      }
+
+      /* Scroll animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ========== RESPONSIVE DESIGN ========== */
+      @media (max-width: 768px) {
+        nav {
+          padding: 1rem;
+          flex-wrap: wrap;
+        }
+
+        .language-selector {
+          order: 3;
+          width: 100%;
+          justify-content: center;
+          margin-top: 0.5rem;
+          gap: 0.8rem;
+        }
+
+        .language-select {
+          padding: 0.4rem 0.8rem;
+          font-size: 0.8rem;
+          padding-right: 2rem;
+        }
+
+        nav ul {
+          display: none;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          right: 0;
+          background: white;
+          flex-direction: column;
+          padding: 2rem 1rem;
+          gap: 0.5rem;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav.menu-open ul {
+          display: flex;
+        }
+
+        .nav-toggle {
+          display: block;
+          order: 2;
+        }
+
+        .language-selector {
+          gap: 0.5rem;
+        }
+
+        .hero {
+          margin-top: 50px;
+          min-height: 80vh;
+          padding: 1rem;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero-logo {
+          font-size: 2.5rem;
+        }
+
+        .hero-tagline {
+          font-size: 1rem;
+        }
+
+        .cta-group {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .about-content,
+        .contact-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .about-image {
+          height: 300px;
+        }
+
+        .process-step:not(:last-child)::after {
+          display: none;
+        }
+
+        .pricing-table {
+          font-size: 0.9rem;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+          padding: 1rem;
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .gallery-item {
+          height: 200px;
+          font-size: 2.5rem;
+        }
+
+        .whatsapp-btn {
+          bottom: 20px;
+          right: 20px;
+          width: 50px;
+          height: 50px;
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 1.5rem;
+        }
+
+        .hero-logo {
+          font-size: 2rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .pricing-table {
+          font-size: 0.8rem;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+          padding: 0.8rem;
+        }
+
+        .contact-form {
+          padding: 1.5rem;
+        }
+      }
+
+      /* ========== FOOTER ========== */
+      footer {
+        background: linear-gradient(
+          135deg,
+          var(--terracotta) 0%,
+          var(--terracotta-light) 100%
+        );
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        margin-top: 3rem;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: opacity 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        opacity: 0.8;
+      }
+
+      .footer-divider {
+        width: 100px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.3);
+        margin: 1.5rem auto;
+      }
+
+      .footer-copyright {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-credit {
+        font-size: 0.8rem;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .footer-links {
+          gap: 1rem;
+          font-size: 0.85rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <a href="#" class="logo">
+        <img src="image.png" alt="The GrindNest Logo" />
+        <span>The GrindNest</span>
+      </a>
+      <ul id="menu">
+        <li><a href="#about" data-key="about">À propos</a></li>
+        <li><a href="#spaces" data-key="spaces">Espaces</a></li>
+        <li><a href="#pricing" data-key="pricing">Tarifs</a></li>
+        <li><a href="#process" data-key="process">Processus</a></li>
+        <li><a href="#gallery" data-key="gallery">Galerie</a></li>
+        <li><a href="#contact" data-key="contact">Contact</a></li>
+      </ul>
+      <div class="language-selector">
+        <i
+          class="fas fa-globe"
+          style="color: var(--terracotta); font-size: 1rem"
+        ></i>
+        <select class="language-select" id="languageSelect">
+          <option value="fr">Français</option>
+          <option value="ar">العربية</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <button class="nav-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-logo">☕</div>
+        <h1>The GrindNest</h1>
+        <p class="hero-tagline">More Than Coffee</p>
+        <p
+          style="
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+          "
+        >
+          Votre café de spécialité, espace de coworking et lieu de rencontre
+          urbain
+        </p>
+        <div class="cta-group">
+          <button
+            class="btn btn-primary"
+            onclick="document.getElementById('contact').scrollIntoView()"
+          >
+            <i class="fas fa-calendar"></i> Réserver un espace
+          </button>
+          <button
+            class="btn btn-secondary"
+            onclick="document.getElementById('about').scrollIntoView()"
+          >
+            <i class="fas fa-compass"></i> Découvrir
+          </button>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <h2 class="section-title fade-in" data-key="about_title">
+        À propos de nous
+      </h2>
+      <p class="section-subtitle fade-in" data-key="about_subtitle">
+        The GrindNest réinvente l'expérience urbaine en fusionnant la passion du
+        café artisanal avec l'esprit collaboratif du coworking
+      </p>
+      <div class="about-content">
+        <div class="about-text fade-in">
+          <h3 data-key="about_unique">Un concept unique à Rabat</h3>
+          <p data-key="about_text">
+            Découvrez The GrindNest : un refuge urbain où l'excellence
+            caféinière rencontre l'espace de travail moderne. Notre concept
+            hybride crée l'environnement idéal pour les professionnels, créatifs
+            et lectrices en quête d'ambiance inspirante.
+          </p>
+          <div class="about-features">
+            <div class="feature-item fade-in">
+              <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+              <div class="feature-text">
+                <h4>Café Artisanal</h4>
+                <p>Sélection de grains premium torréfiés localement</p>
+              </div>
+            </div>
+            <div class="feature-item fade-in">
+              <div class="feature-icon"><i class="fas fa-laptop"></i></div>
+              <div class="feature-text">
+                <h4>Espaces Modernes</h4>
+                <p>
+                  Coworking avec Wi-Fi haute vitesse et électricité illimitée
+                </p>
+              </div>
+            </div>
+            <div class="feature-item fade-in">
+              <div class="feature-icon"><i class="fas fa-users"></i></div>
+              <div class="feature-text">
+                <h4>Networking & Relaxation</h4>
+                <p>
+                  Espace lecture et connexions professionnelles authentiques
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-image fade-in">
+          <i class="fas fa-image"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spaces Section -->
+    <section class="spaces" id="spaces">
+      <h2 class="section-title fade-in" data-key="spaces_title">Nos espaces</h2>
+      <p class="section-subtitle fade-in" data-key="spaces_subtitle">
+        Choisissez l'environnement qui vous correspond
+      </p>
+      <div class="spaces-grid">
+        <div class="space-card fade-in">
+          <div class="space-header">
+            <div class="space-icon"><i class="fas fa-coffee"></i></div>
+            <h3 data-key="cafe_relax">Café & Détente</h3>
+          </div>
+          <div class="space-body">
+            <p data-key="cafe_desc">
+              Savourez notre sélection caféinière dans une ambiance chaleureuse
+              et accueillante.
+            </p>
+            <ul class="space-features">
+              <li data-key="comfortable_tables">Tables confortables</li>
+              <li data-key="soft_music">Ambiance musicale douce</li>
+              <li data-key="expert_barista">Barista expert</li>
+              <li data-key="local_pastries">Pâtisseries locales</li>
+            </ul>
+            <p><strong>À partir de 15-25 DH</strong></p>
+          </div>
+        </div>
+        <div class="space-card fade-in">
+          <div class="space-header">
+            <div class="space-icon"><i class="fas fa-laptop"></i></div>
+            <h3 data-key="coworking_title">Bureau & Coworking</h3>
+          </div>
+          <div class="space-body">
+            <p data-key="coworking_desc">
+              Travaillez dans un environnement professionnel pensé pour la
+              productivité.
+            </p>
+            <ul class="space-features">
+              <li data-key="high_speed_wifi">Wi-Fi haute vitesse</li>
+              <li data-key="equipped_desks">Bureaux équipés</li>
+              <li data-key="unlimited_electricity">Électricité illimitée</li>
+              <li data-key="optional_24_7">Accès 24/7 optionnel</li>
+            </ul>
+            <p><strong>À partir de 35-60 DH</strong></p>
+          </div>
+        </div>
+        <div class="space-card fade-in">
+          <div class="space-header">
+            <div class="space-icon"><i class="fas fa-users"></i></div>
+            <h3 data-key="meeting_title">Salle de Réunion</h3>
+          </div>
+          <div class="space-body">
+            <p data-key="meeting_desc">
+              Espaces privés et équipés pour vos réunions professionnelles et
+              événements.
+            </p>
+            <ul class="space-features">
+              <li data-key="screen_display">Écran de présentation</li>
+              <li data-key="air_conditioning">Climatisation</li>
+              <li data-key="catering_service">Service traiteur optionnel</li>
+              <li data-key="reserved_parking">Parking réservé</li>
+            </ul>
+            <p><strong>Sur devis</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+      <h2 class="section-title fade-in" data-key="pricing_title">Tarifs</h2>
+      <p class="section-subtitle fade-in" data-key="pricing_subtitle">
+        Des tarifs flexibles adaptés à vos besoins
+      </p>
+      <table class="pricing-table fade-in">
+        <thead>
+          <tr>
+            <th>Forfait</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Avantages</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Café Seul</strong></td>
+            <td>Visite occasionnelle</td>
+            <td>
+              <span class="price-value" data-key="price_coffee_only"
+                >15-25 DH</span
+              >
+            </td>
+            <td>Boisson + ambiance</td>
+          </tr>
+          <tr>
+            <td><strong>Café + Espace</strong></td>
+            <td>Journée de travail</td>
+            <td>
+              <span class="price-value" data-key="price_coffee_space"
+                >35-60 DH</span
+              >
+            </td>
+            <td>Espace travail + WiFi + café</td>
+          </tr>
+          <tr>
+            <td><strong>Abonnement Mensuel</strong></td>
+            <td>Accès illimité</td>
+            <td>
+              <span class="price-value" data-key="price_monthly"
+                >500-1 500 DH</span
+              >
+            </td>
+            <td>Accès complet + priorité réservation</td>
+          </tr>
+          <tr>
+            <td><strong>Journée Télétravail</strong></td>
+            <td>Forfait professionnel</td>
+            <td>
+              <span class="price-value" data-key="price_telework"
+                >80-100 DH</span
+              >
+            </td>
+            <td>Bureau privé + services illimités</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+      <div class="process-container">
+        <h2 class="section-title fade-in" data-key="process_title">
+          Notre processus
+        </h2>
+        <p class="section-subtitle fade-in" data-key="process_subtitle">
+          Réservation simple et sécurisée en 4 étapes
+        </p>
+        <div class="process-steps">
+          <div class="process-step fade-in">
+            <div class="step-number">1</div>
+            <h4>Réservation Flexible</h4>
+            <p>
+              Choisissez votre date, horaire et type d'espace via notre
+              formulaire intuitif
+            </p>
+          </div>
+          <div class="process-step fade-in">
+            <div class="step-number">2</div>
+            <h4>Paiement Facile</h4>
+            <p>
+              Payez en ligne sécurisé ou sur place avec multiple moyens de
+              paiement
+            </p>
+          </div>
+          <div class="process-step fade-in">
+            <div class="step-number">3</div>
+            <h4>Accès Sécurisé</h4>
+            <p>
+              Accédez à votre espace réservé avec code d'accès et confirmation
+              instantanée
+            </p>
+          </div>
+          <div class="process-step fade-in">
+            <div class="step-number">4</div>
+            <h4>Suivi & Entretien</h4>
+            <p>
+              Retours des clients et maintenance régulière pour votre confort
+              optimal
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+      <div class="gallery-container">
+        <h2 class="section-title fade-in" data-key="gallery_title">Galerie</h2>
+        <p class="section-subtitle fade-in" data-key="gallery_subtitle">
+          Explorez l'ambiance unique de The GrindNest
+        </p>
+        <div class="gallery-grid">
+          <div class="gallery-item fade-in">
+            <i class="fas fa-image"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-image"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-image"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-image"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-image"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-image"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="contact-container">
+        <h2 class="section-title fade-in" data-key="contact_title">
+          Nous contacter
+        </h2>
+        <p class="section-subtitle fade-in" data-key="contact_subtitle">
+          Posez vos questions ou réservez votre espace dès maintenant
+        </p>
+        <div class="contact-content">
+          <div class="contact-info fade-in">
+            <div class="info-block">
+              <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <h4>Localisation</h4>
+                <p>Rabat, Maroc<br />Centre-ville, quartier dynamique</p>
+              </div>
+            </div>
+            <div class="info-block">
+              <div class="info-icon"><i class="fas fa-clock"></i></div>
+              <div>
+                <h4>Horaires</h4>
+                <p>Lun-Ven: 07:00 - 22:00<br />Sam-Dim: 09:00 - 20:00</p>
+              </div>
+            </div>
+            <div class="info-block">
+              <div class="info-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <h4>Téléphone</h4>
+                <p>+212 5XX XXX XXX</p>
+              </div>
+            </div>
+            <div class="info-block">
+              <div class="info-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <h4>Email</h4>
+                <p>hello@thegrindnest.ma</p>
+              </div>
+            </div>
+            <div>
+              <h4 style="margin-bottom: 1rem">Suivez-nous</h4>
+              <div class="social-links">
+                <a
+                  href="https://instagram.com/the_grindnest"
+                  class="social-link"
+                  title="Instagram"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a
+                  href="https://facebook.com/thegrindnest"
+                  class="social-link"
+                  title="Facebook"
+                >
+                  <i class="fab fa-facebook"></i>
+                </a>
+                <a
+                  href="https://linkedin.com/company/thegrindnest"
+                  class="social-link"
+                  title="LinkedIn"
+                >
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a
+                  href="https://twitter.com/the_grindnest"
+                  class="social-link"
+                  title="Twitter"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <form class="contact-form fade-in" id="contactForm">
+            <div class="form-group">
+              <label for="name">Nom complet</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="date">Date souhaitée</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="form-group">
+              <label for="space">Type d'espace</label>
+              <select id="space" name="space" required>
+                <option value="">-- Sélectionner --</option>
+                <option value="cafe">Café & Détente</option>
+                <option value="coworking">Bureau & Coworking</option>
+                <option value="reunion">Salle de Réunion</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Votre demande..."
+              ></textarea>
+            </div>
+            <button type="submit" class="form-submit">
+              Envoyer ma réservation
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#about" data-key="about">À propos</a>
+          <a href="#spaces" data-key="spaces">Espaces</a>
+          <a href="#pricing" data-key="pricing">Tarifs</a>
+          <a href="#contact" data-key="contact">Contact</a>
+          <a href="mailto:hello@thegrindnest.ma" data-key="email">Email</a>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-copyright" data-key="copyright">
+          © 2026 The GrindNest. Tous droits réservés.
+        </div>
+        <div class="footer-credit" data-key="slogan">
+          Café • Coworking • Communauté
+        </div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a
+      href="https://wa.me/212XXXXXXXXX"
+      class="whatsapp-btn"
+      title="Contactez-nous sur WhatsApp"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+      // Smooth scroll and navigation
+      const menuToggle = document.getElementById("menuToggle");
+      const menu = document.getElementById("menu");
+      const nav = document.querySelector("nav");
+
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("menu-open");
+      });
+
+      // Close menu when link clicked
+      document.querySelectorAll("nav a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("menu-open");
+        });
+      });
+
+      // Sticky navigation
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+        }
+      });
+
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".fade-in").forEach((element) => {
+        observer.observe(element);
+      });
+
+      // Form submission
+      document.getElementById("contactForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          date: document.getElementById("date").value,
+          space: document.getElementById("space").value,
+          message: document.getElementById("message").value,
+        };
+
+        console.log("Réservation soumise:", formData);
+
+        // Show success message
+        alert(
+          "Merci! Votre réservation a été reçue.\nNous vous contacterons bientôt pour confirmer.",
+        );
+        document.getElementById("contactForm").reset();
+      });
+
+      // Prevent page zoom on double tap (mobile)
+      let lastTouchEnd = 0;
+      document.addEventListener(
+        "touchend",
+        (event) => {
+          const now = Date.now();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        },
+        false,
+      );
+
+      // Scroll to top on page load
+      window.addEventListener("load", () => {
+        window.scrollTo(0, 0);
+      });
+
+      // ========== MULTI-LANGUAGE SYSTEM ==========
+      const translations = {
+        fr: {
+          about: "À propos",
+          spaces: "Espaces",
+          pricing: "Tarifs",
+          process: "Processus",
+          gallery: "Galerie",
+          contact: "Contact",
+          tagline: "More Than Coffee",
+          tagline_desc:
+            "Votre café de spécialité, espace de coworking et lieu de rencontre urbain",
+          reserve: "Réserver un espace",
+          discover: "Découvrir",
+          about_title: "À propos de nous",
+          about_subtitle:
+            "The GrindNest réinvente l'expérience urbaine en fusionnant la passion du café artisanal avec l'esprit collaboratif du coworking",
+          about_unique: "Un concept unique à Rabat",
+          about_text:
+            "Découvrez The GrindNest : un refuge urbain où l'excellence caféinière rencontre l'espace de travail moderne. Notre concept hybride crée l'environnement idéal pour les professionnels, créatifs et lectrices en quête d'ambiance inspirante.",
+          coffee_artisan: "Café Artisanal",
+          coffee_desc: "Sélection de grains premium torréfiés localement",
+          spaces_modern: "Espaces Modernes",
+          spaces_desc:
+            "Coworking avec Wi-Fi haute vitesse et électricité illimitée",
+          networking: "Networking & Relaxation",
+          networking_desc:
+            "Espace lecture et connexions professionnelles authentiques",
+          spaces_title: "Nos espaces",
+          spaces_subtitle: "Choisissez l'environnement qui vous correspond",
+          cafe_relax: "Café & Détente",
+          cafe_desc:
+            "Savourez notre sélection caféinière dans une ambiance chaleureuse et accueillante.",
+          coworking_title: "Bureau & Coworking",
+          coworking_desc:
+            "Travaillez dans un environnement professionnel pensé pour la productivité.",
+          meeting_title: "Salle de Réunion",
+          meeting_desc:
+            "Espaces privés et équipés pour vos réunions professionnelles et événements.",
+          pricing_title: "Tarifs",
+          pricing_subtitle: "Des tarifs flexibles adaptés à vos besoins",
+          package: "Forfait",
+          description: "Description",
+          price: "Prix",
+          benefits: "Avantages",
+          coffee_only: "Café Seul",
+          occasional: "Visite occasionnelle",
+          coffee_ambiance: "Boisson + ambiance",
+          coffee_space: "Café + Espace",
+          workday: "Journée de travail",
+          workspace_wifi: "Espace travail + WiFi + café",
+          monthly: "Abonnement Mensuel",
+          unlimited: "Accès illimité",
+          full_access: "Accès complet + priorité réservation",
+          telework: "Journée Télétravail",
+          professional: "Forfait professionnel",
+          private_office: "Bureau privé + services illimités",
+          process_title: "Notre processus",
+          process_subtitle: "Réservation simple et sécurisée en 4 étapes",
+          reservation: "Réservation Flexible",
+          reservation_desc:
+            "Choisissez votre date, horaire et type d'espace via notre formulaire intuitif",
+          payment: "Paiement Facile",
+          payment_desc:
+            "Payez en ligne sécurisé ou sur place avec multiple moyens de paiement",
+          access: "Accès Sécurisé",
+          access_desc:
+            "Accédez à votre espace réservé avec code d'accès et confirmation instantanée",
+          maintenance: "Suivi & Entretien",
+          maintenance_desc:
+            "Retours des clients et maintenance régulière pour votre confort optimal",
+          gallery_title: "Galerie",
+          gallery_subtitle: "Explorez l'ambiance unique de The GrindNest",
+          contact_title: "Nous contacter",
+          contact_subtitle:
+            "Posez vos questions ou réservez votre espace dès maintenant",
+          location: "Localisation",
+          location_text: "Rabat, Maroc<br>Centre-ville, quartier dynamique",
+          hours: "Horaires",
+          hours_text: "Lun-Ven: 07:00 - 22:00<br>Sam-Dim: 09:00 - 20:00",
+          phone: "Téléphone",
+          email: "Email",
+          follow: "Suivez-nous",
+          fullname: "Nom complet",
+          date: "Date souhaitée",
+          space_type: "Type d'espace",
+          select: "-- Sélectionner --",
+          message: "Message",
+          message_placeholder: "Votre demande...",
+          submit: "Envoyer ma réservation",
+          copyright: "© 2026 The GrindNest. Tous droits réservés.",
+          slogan: "Café • Coworking • Communauté",
+          comfortable_tables: "Tables confortables",
+          soft_music: "Ambiance musicale douce",
+          expert_barista: "Barista expert",
+          local_pastries: "Pâtisseries locales",
+          high_speed_wifi: "Wi-Fi haute vitesse",
+          equipped_desks: "Bureaux équipés",
+          unlimited_electricity: "Électricité illimitée",
+          optional_24_7: "Accès 24/7 optionnel",
+          screen_display: "Écran de présentation",
+          air_conditioning: "Climatisation",
+          catering_service: "Service traiteur optionnel",
+          reserved_parking: "Parking réservé",
+          price_coffee_only: "15-25 DH",
+          price_coffee_space: "35-60 DH",
+          price_monthly: "500-1 500 DH",
+          price_telework: "80-100 DH",
+        },
+        ar: {
+          about: "معلومات عنا",
+          spaces: "المساحات",
+          pricing: "الأسعار",
+          process: "العملية",
+          gallery: "المعرض",
+          contact: "اتصل بنا",
+          tagline: "أكثر من مجرد قهوة",
+          tagline_desc: "مقهى متخصص وفضاء عمل مشترك ومكان لقاء حضري",
+          reserve: "احجز مساحة",
+          discover: "اكتشف",
+          about_title: "معلومات عنا",
+          about_subtitle:
+            "يعيد The GrindNest ابتكار التجربة الحضرية من خلال دمج شغف القهوة الحرفية مع روح العمل المشترك التعاوني",
+          about_unique: "مفهوم فريد في الرباط",
+          about_text:
+            "اكتشف The GrindNest: ملاذ حضري حيث يلتقي تميز القهوة بفضاء العمل الحديث. يخلق مفهومنا الهجين البيئة المثالية للمحترفين والمبدعين والقراء الذين يبحثون عن أجواء ملهمة.",
+          coffee_artisan: "قهوة حرفية",
+          coffee_desc: "اختيار حبوب فاخرة محمصة محليًا",
+          spaces_modern: "مساحات عصرية",
+          spaces_desc: "عمل مشترك مع واي فاي عالي السرعة وكهرباء غير محدودة",
+          networking: "التواصل والاسترخاء",
+          networking_desc: "مساحة قراءة واتصالات مهنية أصلية",
+          spaces_title: "مساحاتنا",
+          spaces_subtitle: "اختر البيئة التي تناسبك",
+          cafe_relax: "مقهى والاسترخاء",
+          cafe_desc: "تمتع بتشكيلتنا من القهوة في أجواء دافئة وترحابية.",
+          coworking_title: "المكتب والعمل المشترك",
+          coworking_desc: "اعمل في بيئة احترافية مصممة للإنتاجية.",
+          meeting_title: "قاعة الاجتماعات",
+          meeting_desc:
+            "مساحات خاصة ومجهزة لاجتماعاتك المهنية والأحداث الخاصة بك.",
+          pricing_title: "الأسعار",
+          pricing_subtitle: "أسعار مرنة تناسب احتياجاتك",
+          package: "الحزمة",
+          description: "الوصف",
+          price: "السعر",
+          benefits: "الفوائد",
+          coffee_only: "قهوة فقط",
+          occasional: "زيارة عرضية",
+          coffee_ambiance: "مشروب + أجواء",
+          coffee_space: "قهوة + مساحة",
+          workday: "يوم عمل",
+          workspace_wifi: "مساحة عمل + واي فاي + قهوة",
+          monthly: "الاشتراك الشهري",
+          unlimited: "وصول غير محدود",
+          full_access: "وصول كامل + أولوية الحجز",
+          telework: "يوم العمل من المنزل",
+          professional: "حزمة احترافية",
+          private_office: "مكتب خاص + خدمات غير محدودة",
+          process_title: "عمليتنا",
+          process_subtitle: "حجز بسيط وآمن في 4 خطوات",
+          reservation: "حجز مرن",
+          reservation_desc:
+            "اختر تاريخك وساعتك ونوع مساحتك عبر نموذجنا البديهي",
+          payment: "دفع سهل",
+          payment_desc:
+            "ادفع عبر الإنترنت بشكل آمن أو في الموقع بطرق دفع متعددة",
+          access: "وصول آمن",
+          access_desc: "احصل على المساحة المحجوزة برمز وصول وتأكيد فوري",
+          maintenance: "المتابعة والصيانة",
+          maintenance_desc: "تعليقات العملاء والصيانة المنتظمة لراحتك المثلى",
+          gallery_title: "المعرض",
+          gallery_subtitle: "استكشف الأجواء الفريدة من The GrindNest",
+          contact_title: "اتصل بنا",
+          contact_subtitle: "اطرح أسئلتك أو احجز مساحتك الآن",
+          location: "الموقع",
+          location_text: "الرباط، المغرب<br>وسط البلد، حي نشط",
+          hours: "أوقات العمل",
+          hours_text:
+            "الإثنين-الجمعة: 07:00 - 22:00<br>السبت-الأحد: 09:00 - 20:00",
+          phone: "الهاتف",
+          email: "البريد الإلكتروني",
+          follow: "تابعنا",
+          fullname: "الاسم الكامل",
+          date: "التاريخ المطلوب",
+          space_type: "نوع المساحة",
+          select: "-- اختر --",
+          message: "الرسالة",
+          message_placeholder: "طلبك...",
+          submit: "إرسال حجزي",
+          copyright: "© 2026 The GrindNest. جميع الحقوق محفوظة.",
+          slogan: "قهوة • عمل مشترك • مجتمع",
+          comfortable_tables: "طاولات مريحة",
+          soft_music: "موسيقى هادئة",
+          expert_barista: "باريستا خبير",
+          local_pastries: "المعجنات المحلية",
+          high_speed_wifi: "واي فاي عالي السرعة",
+          equipped_desks: "مكاتب مجهزة",
+          unlimited_electricity: "كهرباء غير محدودة",
+          optional_24_7: "وصول اختياري 24/7",
+          screen_display: "شاشة عرض",
+          air_conditioning: "تكييف الهواء",
+          catering_service: "خدمة الخدمات الغذائية الاختيارية",
+          reserved_parking: "موقف سيارات محجوز",
+          price_coffee_only: "15-25 درهم",
+          price_coffee_space: "35-60 درهم",
+          price_monthly: "500-1500 درهم",
+          price_telework: "80-100 درهم",
+        },
+        en: {
+          about: "About",
+          spaces: "Spaces",
+          pricing: "Pricing",
+          process: "Process",
+          gallery: "Gallery",
+          contact: "Contact",
+          tagline: "More Than Coffee",
+          tagline_desc:
+            "Your specialty coffee shop, coworking space and urban meeting place",
+          reserve: "Reserve a Space",
+          discover: "Discover",
+          about_title: "About Us",
+          about_subtitle:
+            "The GrindNest reinvents the urban experience by merging the passion of artisanal coffee with the collaborative spirit of coworking",
+          about_unique: "A Unique Concept in Rabat",
+          about_text:
+            "Discover The GrindNest: an urban sanctuary where coffee excellence meets modern workspace. Our hybrid concept creates the ideal environment for professionals, creatives and readers seeking inspiring atmosphere.",
+          coffee_artisan: "Artisan Coffee",
+          coffee_desc: "Selection of premium beans locally roasted",
+          spaces_modern: "Modern Spaces",
+          spaces_desc:
+            "Coworking with high-speed Wi-Fi and unlimited electricity",
+          networking: "Networking & Relaxation",
+          networking_desc:
+            "Reading space and authentic professional connections",
+          spaces_title: "Our Spaces",
+          spaces_subtitle: "Choose the environment that suits you",
+          cafe_relax: "Café & Relaxation",
+          cafe_desc:
+            "Enjoy our coffee selection in a warm and welcoming atmosphere.",
+          coworking_title: "Office & Coworking",
+          coworking_desc:
+            "Work in a professional environment designed for productivity.",
+          meeting_title: "Meeting Room",
+          meeting_desc:
+            "Private and equipped spaces for your professional meetings and events.",
+          pricing_title: "Pricing",
+          pricing_subtitle: "Flexible rates adapted to your needs",
+          package: "Package",
+          description: "Description",
+          price: "Price",
+          benefits: "Benefits",
+          coffee_only: "Coffee Only",
+          occasional: "Occasional visit",
+          coffee_ambiance: "Beverage + ambiance",
+          coffee_space: "Coffee + Space",
+          workday: "Work day",
+          workspace_wifi: "Workspace + Wi-Fi + coffee",
+          monthly: "Monthly Subscription",
+          unlimited: "Unlimited access",
+          full_access: "Full access + booking priority",
+          telework: "Telework Day",
+          professional: "Professional package",
+          private_office: "Private office + unlimited services",
+          process_title: "Our Process",
+          process_subtitle: "Simple and secure booking in 4 steps",
+          reservation: "Flexible Reservation",
+          reservation_desc:
+            "Choose your date, time and space type through our intuitive form",
+          payment: "Easy Payment",
+          payment_desc:
+            "Pay securely online or on-site with multiple payment methods",
+          access: "Secure Access",
+          access_desc:
+            "Access your reserved space with access code and instant confirmation",
+          maintenance: "Follow-up & Maintenance",
+          maintenance_desc:
+            "Customer feedback and regular maintenance for your optimal comfort",
+          gallery_title: "Gallery",
+          gallery_subtitle: "Explore the unique atmosphere of The GrindNest",
+          contact_title: "Contact Us",
+          contact_subtitle: "Ask your questions or book your space now",
+          location: "Location",
+          location_text: "Rabat, Morocco<br>Downtown, vibrant neighborhood",
+          hours: "Hours",
+          hours_text: "Mon-Fri: 07:00 - 22:00<br>Sat-Sun: 09:00 - 20:00",
+          phone: "Phone",
+          email: "Email",
+          follow: "Follow Us",
+          fullname: "Full Name",
+          date: "Desired Date",
+          space_type: "Space Type",
+          select: "-- Select --",
+          message: "Message",
+          message_placeholder: "Your request...",
+          submit: "Send My Reservation",
+          copyright: "© 2026 The GrindNest. All rights reserved.",
+          slogan: "Coffee • Coworking • Community",
+          comfortable_tables: "Comfortable tables",
+          soft_music: "Soft music ambiance",
+          expert_barista: "Expert barista",
+          local_pastries: "Local pastries",
+          high_speed_wifi: "High-speed Wi-Fi",
+          equipped_desks: "Equipped desks",
+          unlimited_electricity: "Unlimited electricity",
+          optional_24_7: "Optional 24/7 access",
+          screen_display: "Display screen",
+          air_conditioning: "Air conditioning",
+          catering_service: "Optional catering service",
+          reserved_parking: "Reserved parking",
+          price_coffee_only: "15-25 DH",
+          price_coffee_space: "35-60 DH",
+          price_monthly: "500-1,500 DH",
+          price_telework: "80-100 DH",
+        },
+      };
+
+      let currentLanguage = "fr";
+
+      // Translation function
+      function changeLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem("selectedLanguage", lang);
+
+        // Update language select
+        document.getElementById("languageSelect").value = lang;
+
+        // Update all elements with data-key attribute
+        document.querySelectorAll("[data-key]").forEach((element) => {
+          const key = element.dataset.key;
+          if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+          }
+        });
+
+        // Update special elements
+        updateSpecialTranslations(lang);
+
+        // Change text direction for Arabic
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+      }
+
+      function updateSpecialTranslations(lang) {
+        const t = translations[lang];
+
+        // Hero section
+        const heroTagline = document.querySelector(".hero-tagline");
+        if (heroTagline) heroTagline.textContent = t.tagline;
+
+        const heroP = document.querySelector(".hero p:not(.hero-tagline)");
+        if (heroP) heroP.textContent = t.tagline_desc;
+
+        // Button labels
+        const reserveBtn = document.querySelector(".cta-group .btn-primary");
+        if (reserveBtn)
+          reserveBtn.innerHTML = '<i class="fas fa-calendar"></i> ' + t.reserve;
+
+        const discoverBtn = document.querySelector(".cta-group .btn-secondary");
+        if (discoverBtn)
+          discoverBtn.innerHTML =
+            '<i class="fas fa-compass"></i> ' + t.discover;
+
+        // Feature items
+        const features = document.querySelectorAll(".feature-text h4");
+        const featureDescs = document.querySelectorAll(".feature-text p");
+        if (features[0]) features[0].textContent = t.coffee_artisan;
+        if (featureDescs[0]) featureDescs[0].textContent = t.coffee_desc;
+        if (features[1]) features[1].textContent = t.spaces_modern;
+        if (featureDescs[1]) featureDescs[1].textContent = t.spaces_desc;
+        if (features[2]) features[2].textContent = t.networking;
+        if (featureDescs[2]) featureDescs[2].textContent = t.networking_desc;
+
+        // Space cards
+        const spaceCards = document.querySelectorAll(".space-card h3");
+        const spaceDescs = document.querySelectorAll(
+          ".space-body p:first-child",
+        );
+        if (spaceCards[0]) spaceCards[0].textContent = t.cafe_relax;
+        if (spaceDescs[0]) spaceDescs[0].textContent = t.cafe_desc;
+        if (spaceCards[1]) spaceCards[1].textContent = t.coworking_title;
+        if (spaceDescs[1]) spaceDescs[1].textContent = t.coworking_desc;
+        if (spaceCards[2]) spaceCards[2].textContent = t.meeting_title;
+        if (spaceDescs[2]) spaceDescs[2].textContent = t.meeting_desc;
+
+        // Pricing table
+        const pricingHeaders = document.querySelectorAll(".pricing-table th");
+        if (pricingHeaders[0]) pricingHeaders[0].textContent = t.package;
+        if (pricingHeaders[1]) pricingHeaders[1].textContent = t.description;
+        if (pricingHeaders[2]) pricingHeaders[2].textContent = t.price;
+        if (pricingHeaders[3]) pricingHeaders[3].textContent = t.benefits;
+
+        // Pricing table rows
+        const pricingRows = document.querySelectorAll(
+          ".pricing-table tbody tr",
+        );
+        const pricingData = [
+          {
+            name: t.coffee_only,
+            desc: t.occasional,
+            benefits: t.coffee_ambiance,
+          },
+          { name: t.coffee_space, desc: t.workday, benefits: t.workspace_wifi },
+          { name: t.monthly, desc: t.unlimited, benefits: t.full_access },
+          {
+            name: t.telework,
+            desc: t.professional,
+            benefits: t.private_office,
+          },
+        ];
+
+        pricingRows.forEach((row, index) => {
+          if (pricingData[index]) {
+            const cells = row.querySelectorAll("td");
+            if (cells[0])
+              cells[0].innerHTML = `<strong>${pricingData[index].name}</strong>`;
+            if (cells[1]) cells[1].textContent = pricingData[index].desc;
+            if (cells[3]) cells[3].textContent = pricingData[index].benefits;
+          }
+        });
+
+        // Process steps
+        const stepTitles = document.querySelectorAll(".process-step h4");
+        const stepDescs = document.querySelectorAll(".process-step p");
+        if (stepTitles[0]) stepTitles[0].textContent = t.reservation;
+        if (stepDescs[0]) stepDescs[0].textContent = t.reservation_desc;
+        if (stepTitles[1]) stepTitles[1].textContent = t.payment;
+        if (stepDescs[1]) stepDescs[1].textContent = t.payment_desc;
+        if (stepTitles[2]) stepTitles[2].textContent = t.access;
+        if (stepDescs[2]) stepDescs[2].textContent = t.access_desc;
+        if (stepTitles[3]) stepTitles[3].textContent = t.maintenance;
+        if (stepDescs[3]) stepDescs[3].textContent = t.maintenance_desc;
+
+        // Contact form
+        document.getElementById("name").placeholder = t.fullname;
+        document.querySelector('label[for="name"]').textContent = t.fullname;
+        document.querySelector('label[for="email"]').textContent = t.email;
+        document.querySelector('label[for="date"]').textContent = t.date;
+        document.querySelector('label[for="space"]').textContent = t.space_type;
+        document.querySelector('label[for="message"]').textContent = t.message;
+        document.getElementById("message").placeholder = t.message_placeholder;
+        document.querySelector(".form-submit").textContent = t.submit;
+
+        // Space type options
+        const spaceOptions = document.querySelectorAll("#space option");
+        if (spaceOptions[0]) spaceOptions[0].textContent = t.select;
+        if (spaceOptions[1]) spaceOptions[1].textContent = t.cafe_relax;
+        if (spaceOptions[2]) spaceOptions[2].textContent = t.coworking_title;
+        if (spaceOptions[3]) spaceOptions[3].textContent = t.meeting_title;
+
+        // Info blocks
+        const infoBlocks = document.querySelectorAll(".info-block h4");
+        const infoParagraphs = document.querySelectorAll(".info-block p");
+        const infoLabels = ["location", "hours", "phone", "email"];
+        infoBlocks.forEach((block, i) => {
+          if (i < infoLabels.length) block.textContent = t[infoLabels[i]];
+        });
+
+        // Location and hours text
+        if (infoParagraphs[0]) infoParagraphs[0].innerHTML = t.location_text;
+        if (infoParagraphs[1]) infoParagraphs[1].innerHTML = t.hours_text;
+
+        // Social follow
+        const followLabel = document.querySelector(
+          ".info-block:has(>.social-links) h4",
+        );
+        if (followLabel) followLabel.textContent = t.follow;
+
+        // Footer
+        const copyright = document.querySelector(".footer-copyright");
+        if (copyright) copyright.textContent = t.copyright;
+
+        const credit = document.querySelector(".footer-credit");
+        if (credit) credit.textContent = t.slogan;
+      }
+
+      // Language selector
+      const languageSelect = document.getElementById("languageSelect");
+      languageSelect.addEventListener("change", (e) => {
+        changeLanguage(e.target.value);
+      });
+
+      // Load saved language or default to French
+      const savedLanguage = localStorage.getItem("selectedLanguage") || "fr";
+      languageSelect.value = savedLanguage;
+      changeLanguage(savedLanguage);
+    </script>
+  </body>
+</html>
